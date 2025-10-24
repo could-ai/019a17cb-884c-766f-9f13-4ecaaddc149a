@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:profitify/models/asset_model.dart';
 import 'package:profitify/services/api_service.dart';
 import 'package:profitify/widgets/asset_card.dart';
+import 'package:profitify/widgets/asset_toggle_switch.dart';
+
+enum AssetType { crypto, stocks }
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -13,12 +16,19 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late Future<List<Asset>> _cryptoAssets;
   late Future<List<Asset>> _stockAssets;
+  AssetType _selectedAssetType = AssetType.crypto;
 
   @override
   void initState() {
     super.initState();
     _cryptoAssets = ApiService.getTopCrypto();
     _stockAssets = ApiService.getTopStocks();
+  }
+
+  void _onAssetTypeChanged(AssetType assetType) {
+    setState(() {
+      _selectedAssetType = assetType;
+    });
   }
 
   @override
@@ -33,11 +43,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle(context, 'Top Cryptocurrencies'),
-            _buildAssetList(_cryptoAssets),
+            AssetToggleSwitch(
+              selectedType: _selectedAssetType,
+              onChanged: _onAssetTypeChanged,
+            ),
             const SizedBox(height: 24),
-            _buildSectionTitle(context, 'Top Stocks (PSX & Global)'),
-            _buildAssetList(_stockAssets),
+            _buildSectionTitle(
+              context,
+              _selectedAssetType == AssetType.crypto
+                  ? 'Top Cryptocurrencies'
+                  : 'Top Stocks (PSX & Global)',
+            ),
+            _buildAssetList(),
           ],
         ),
       ),
@@ -54,7 +71,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildAssetList(Future<List<Asset>> futureAssets) {
+  Widget _buildAssetList() {
+    final futureAssets = _selectedAssetType == AssetType.crypto
+        ? _cryptoAssets
+        : _stockAssets;
+
     return FutureBuilder<List<Asset>>(
       future: futureAssets,
       builder: (context, snapshot) {
