@@ -10,10 +10,10 @@ class ApiService {
   static Future<List<Asset>> getTopCrypto() async {
     await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
     return [
-      Asset(symbol: 'BTC', name: 'Bitcoin', price: 68123.45, changePercent24Hr: 2.5),
-      Asset(symbol: 'ETH', name: 'Ethereum', price: 3540.12, changePercent24Hr: -1.2),
-      Asset(symbol: 'SOL', name: 'Solana', price: 165.80, changePercent24Hr: 5.8),
-      Asset(symbol: 'BNB', name: 'Binance Coin', price: 590.55, changePercent24Hr: 0.5),
+      Asset(symbol: 'BTC', name: 'Bitcoin', price: 68123.45, changePercent24Hr: 2.5, url: 'https://www.binance.com/en/trade/BTC_USDT'),
+      Asset(symbol: 'ETH', name: 'Ethereum', price: 3540.12, changePercent24Hr: -1.2, url: 'https://www.binance.com/en/trade/ETH_USDT'),
+      Asset(symbol: 'SOL', name: 'Solana', price: 165.80, changePercent24Hr: 5.8, url: 'https://www.binance.com/en/trade/SOL_USDT'),
+      Asset(symbol: 'BNB', name: 'Binance Coin', price: 590.55, changePercent24Hr: 0.5, url: 'https://www.binance.com/en/trade/BNB_USDT'),
     ];
   }
 
@@ -21,10 +21,10 @@ class ApiService {
   static Future<List<Asset>> getTopStocks() async {
     await Future.delayed(const Duration(seconds: 1)); // Simulate network delay
     return [
-      Asset(symbol: 'PSX:OGDC', name: 'Oil & Gas Dev.', price: 150.75, changePercent24Hr: 1.1),
-      Asset(symbol: 'AAPL', name: 'Apple Inc.', price: 195.34, changePercent24Hr: -0.5),
-      Asset(symbol: 'TSLA', name: 'Tesla Inc.', price: 177.48, changePercent24Hr: 3.2),
-      Asset(symbol: 'PSX:LUCK', name: 'Lucky Cement', price: 750.00, changePercent24Hr: -2.0),
+      Asset(symbol: 'PSX:OGDC', name: 'Oil & Gas Dev.', price: 150.75, changePercent24Hr: 1.1, url: 'https://www.google.com/search?q=PSX:OGDC'),
+      Asset(symbol: 'AAPL', name: 'Apple Inc.', price: 195.34, changePercent24Hr: -0.5, url: 'https://www.google.com/search?q=NASDAQ:AAPL'),
+      Asset(symbol: 'TSLA', name: 'Tesla Inc.', price: 177.48, changePercent24Hr: 3.2, url: 'https://www.google.com/search?q=NASDAQ:TSLA'),
+      Asset(symbol: 'PSX:LUCK', name: 'Lucky Cement', price: 750.00, changePercent24Hr: -2.0, url: 'https://www.google.com/search?q=PSX:LUCK'),
     ];
   }
 

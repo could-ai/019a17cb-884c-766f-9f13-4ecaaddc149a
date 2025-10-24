@@ -3,11 +3,13 @@ class Asset {
   final String name;
   final double price;
   final double changePercent24Hr;
+  final String url;
 
   Asset({
     required this.symbol,
     required this.name,
     required this.price,
     required this.changePercent24Hr,
+    required this.url,
   });
 }
